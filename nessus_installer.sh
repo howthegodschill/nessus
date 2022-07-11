@@ -8,7 +8,6 @@
 # Installs the Nessus Agent from Jamf #
 #######################################
 /usr/local/jamf/bin/jamf policy -event install-nessus
-touch /Library/NessusAgent/nessus_installed.txt
 launchctl load -w /Library/LaunchDaemons/com.tenablesecurity.nessusagent.plist
 
 ####################################
