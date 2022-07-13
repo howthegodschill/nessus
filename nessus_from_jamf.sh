@@ -6,6 +6,12 @@
 # 2. Link to Tenable based on the department #
 ##############################################
 
+# Installs the Nessus Agent from Jamf
+/usr/local/jamf/bin/jamf policy -event <INSERT_JAMF_POLICY>
+
+# Loads the agent
+launchctl load -w /Library/LaunchDaemons/com.tenablesecurity.nessusagent.plist
+
 # Jamf Pro Server URL
 jss_url=$(defaults read /Library/Preferences/com.jamfsoftware.jamf.plist jss_url \
 | sed s'/.$//')
