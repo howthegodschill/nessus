@@ -29,10 +29,6 @@ serial_number=$(system_profiler SPHardwareDataType \
 department=$(curl -su "$api_user":"$api_pass" -H "Accept: application/xml" "$jss_url"/JSSResource/computers/serialnumber/"$serial_number" \
 | xmllint --xpath 'computer/location/department/text()' -)
 
-# Unlinks in order to remove the machine's uuid from Tenable
-/Library/NessusAgent/run/sbin/nessuscli agent unlink --force
-sleep 5
-
 # Links the Nessus Agent to the proper department in the Tenable instance
 /Library/NessusAgent/run/sbin/nessuscli agent link \
 --key=<INSERT_NESSUS_KEY> \
