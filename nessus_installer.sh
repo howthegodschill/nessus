@@ -5,7 +5,9 @@
 ###############################################################################
 
 # Installs the Nessus Agent from Jamf
-/usr/local/jamf/bin/jamf policy -event install-nessus
+/usr/local/jamf/bin/jamf policy -event <INSERT_JAMF_POLICY>
+
+# Loads the agent
 launchctl load -w /Library/LaunchDaemons/com.tenablesecurity.nessusagent.plist
 
 # Prompts for department selection
