@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ###############################################################################
-# PURPOSE - Link Nessus Agent to the machine based on the selected department #
+# PURPOSE - Link Nessus Agent to the machine based on the selected group #
 ###############################################################################
 
 # Installs the Nessus Agent from Jamf
@@ -10,29 +10,29 @@
 # Loads the agent
 launchctl load -w /Library/LaunchDaemons/com.tenablesecurity.nessusagent.plist
 
-# Prompts for department selection
-getDepartment() {
+# Prompts for group selection
+getGroup() {
 
-theDepartment=$(/usr/bin/osascript <<AppleScript
+theGroup=$(/usr/bin/osascript <<AppleScript
 
-set myDepartments to {"Admin", "Communications", "Developers", "Executive", "Finance", "IT", "Operations"}
+set myGroups to {"Admin", "Communications", "Developers", "Executive", "Finance", "IT", "Operations"}
 
-set selectedDepartment to {choose from list myDepartments with prompt "Select the Department:"}
+set selectedGroup to {choose from list myGroups with prompt "Select the Group:"}
 
 AppleScript
 
-echo "${theDepartment}"
+echo "${theGroup}"
 )
 }
 
-getDepartment
+getGroup
 
-echo "${theDepartment}"
+echo "${theGroup}"
 
-# Selected department will kick off the link
-case ${theDepartment} in
-    ${theDepartment})
-        sudo /Library/NessusAgent/run/sbin/nessuscli agent link --key=<INSERT_NESSUS_KEY> --host=<INSERT_NESSUS_HOST> --port=<INSERT_NESSUS_PORT> --groups=${theDepartment};;
+# Selected group will kick off the link
+case ${theGroup} in
+    ${theGroup})
+        sudo /Library/NessusAgent/run/sbin/nessuscli agent link --key=<INSERT_NESSUS_KEY> --host=<INSERT_NESSUS_HOST> --port=<INSERT_NESSUS_PORT> --groups=${theGroup};;
 esac
 
 exit 0
